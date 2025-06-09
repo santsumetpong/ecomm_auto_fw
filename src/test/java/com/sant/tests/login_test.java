@@ -11,11 +11,13 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import java.time.Duration;
+import io.cucumber.java.en.*;
 
 public class login_test {
     WebDriver driver;
 
     @BeforeMethod
+    @Given("the browser is safari and we've properly launched saucedemo")
     public void setup() {
         // WebDriverManager.safaridriver().setup();
         driver = new SafariDriver();
@@ -25,6 +27,7 @@ public class login_test {
     }
 
     @Test
+    @When("we've successfully log in and successfully check title")
     public void testSuccessfulLogin() {
         driver.findElement(By.id("user-name")).sendKeys("standard_user");
         driver.findElement(By.id("password")).sendKeys("secret_sauce");
@@ -36,6 +39,7 @@ public class login_test {
     }
 
     @AfterMethod
+    @Then("clean up resources by shutting down safari")
     public void tearDown() {
         if (driver != null) {
             driver.quit();
